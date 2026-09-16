@@ -7,165 +7,61 @@
 
     <groupId>me.Bunnky</groupId>
     <artifactId>IDreamOfEasy</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 
     <name>IDreamOfEasy</name>
-    <description>Slimefun Legacy maintenance fork of I Dream of Easy for modern Paper servers.</description>
-    <url>https://github.com/wickidcow/IDreamOfEasy</url>
+    <description>Slimefun Legacy maintenance fork of I Dream of Easy for Minecraft 1.21.11 through 26.3.</description>
+    <url>https://github.com/wickidcow/SF_IDreamOfEasy</url>
 
     <licenses>
-        <license>
-            <name>GNU General Public License v3.0</name>
-            <url>https://www.gnu.org/licenses/gpl-3.0.html</url>
-            <distribution>repo</distribution>
-        </license>
+        <license><name>GNU General Public License v3.0</name><url>https://www.gnu.org/licenses/gpl-3.0.html</url><distribution>repo</distribution></license>
     </licenses>
 
     <developers>
-        <developer>
-            <name>Bunnky</name>
-            <roles>
-                <role>Original author</role>
-            </roles>
-        </developer>
-        <developer>
-            <name>wickidcow</name>
-            <roles>
-                <role>Slimefun Legacy maintainer</role>
-            </roles>
-        </developer>
+        <developer><name>Bunnky</name><roles><role>Original author</role></roles></developer>
+        <developer><name>wickidcow</name><roles><role>Slimefun Legacy maintainer</role></roles></developer>
     </developers>
 
     <properties>
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <paper.version>26.2.build.112-stable</paper.version>
+        <paper.version>1.21.11-R0.1-SNAPSHOT</paper.version>
         <slimefun.legacy.version>Legacy-SNAPSHOT</slimefun.legacy.version>
     </properties>
 
     <repositories>
-        <repository>
-            <id>papermc</id>
-            <url>https://repo.papermc.io/repository/maven-public/</url>
-        </repository>
-        <repository>
-            <id>spigot-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-        </repository>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
+        <repository><id>papermc</id><url>https://repo.papermc.io/repository/maven-public/</url></repository>
+        <repository><id>spigot-repo</id><url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url></repository>
+        <repository><id>jitpack.io</id><url>https://jitpack.io</url></repository>
     </repositories>
 
     <build>
-        <finalName>SF_IDreamOfEasy_Legacy_v${project.version}</finalName>
+        <finalName>SF_IDreamOfEasy${project.version}</finalName>
         <defaultGoal>clean package</defaultGoal>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
-
         <resources>
-            <resource>
-                <directory>${basedir}/src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>*</include>
-                </includes>
-            </resource>
+            <resource><directory>${basedir}/src/main/resources</directory><filtering>true</filtering><includes><include>*</include></includes></resource>
         </resources>
-
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.14.1</version>
-                <configuration>
-                    <release>${maven.compiler.release}</release>
-                    <proc>full</proc>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>1.18.46</version>
-                        </path>
-                    </annotationProcessorPaths>
-                </configuration>
+                <groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.14.1</version>
+                <configuration><release>${maven.compiler.release}</release><proc>full</proc><annotationProcessorPaths><path><groupId>org.projectlombok</groupId><artifactId>lombok</artifactId><version>1.18.46</version></path></annotationProcessorPaths></configuration>
             </plugin>
-
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.6.2</version>
-                <configuration>
-                    <minimizeJar>false</minimizeJar>
-                    <createDependencyReducedPom>false</createDependencyReducedPom>
-                    <relocations>
-                        <relocation>
-                            <pattern>org.bstats</pattern>
-                            <shadedPattern>me.bunnky.idreamofeasy.libs.bstats</shadedPattern>
-                        </relocation>
-                    </relocations>
-                    <filters>
-                        <filter>
-                            <artifact>*:*</artifact>
-                            <excludes>
-                                <exclude>META-INF/*.SF</exclude>
-                                <exclude>META-INF/*.DSA</exclude>
-                                <exclude>META-INF/*.RSA</exclude>
-                            </excludes>
-                        </filter>
-                    </filters>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <groupId>org.apache.maven.plugins</groupId><artifactId>maven-shade-plugin</artifactId><version>3.6.2</version>
+                <configuration><minimizeJar>false</minimizeJar><createDependencyReducedPom>false</createDependencyReducedPom><relocations><relocation><pattern>org.bstats</pattern><shadedPattern>me.bunnky.idreamofeasy.libs.bstats</shadedPattern></relocation></relocations><filters><filter><artifact>*:*</artifact><excludes><exclude>META-INF/*.SF</exclude><exclude>META-INF/*.DSA</exclude><exclude>META-INF/*.RSA</exclude></excludes></filter></filters></configuration>
+                <executions><execution><phase>package</phase><goals><goal>shade</goal></goals></execution></executions>
             </plugin>
         </plugins>
     </build>
 
     <dependencies>
-        <dependency>
-            <groupId>io.papermc.paper</groupId>
-            <artifactId>paper-api</artifactId>
-            <version>${paper.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.slimefun</groupId>
-            <artifactId>Slimefun</artifactId>
-            <version>${slimefun.legacy.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.bstats</groupId>
-            <artifactId>bstats-bukkit</artifactId>
-            <version>3.2.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>jsr305</artifactId>
-            <version>3.0.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>26.0.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.46</version>
-            <scope>provided</scope>
-        </dependency>
+        <dependency><groupId>io.papermc.paper</groupId><artifactId>paper-api</artifactId><version>${paper.version}</version><scope>provided</scope></dependency>
+        <dependency><groupId>com.github.slimefun</groupId><artifactId>Slimefun</artifactId><version>${slimefun.legacy.version}</version><scope>provided</scope></dependency>
+        <dependency><groupId>org.bstats</groupId><artifactId>bstats-bukkit</artifactId><version>3.2.1</version></dependency>
+        <dependency><groupId>com.google.code.findbugs</groupId><artifactId>jsr305</artifactId><version>3.0.2</version></dependency>
+        <dependency><groupId>org.jetbrains</groupId><artifactId>annotations</artifactId><version>26.0.2</version></dependency>
+        <dependency><groupId>org.projectlombok</groupId><artifactId>lombok</artifactId><version>1.18.46</version><scope>provided</scope></dependency>
     </dependencies>
 </project>
